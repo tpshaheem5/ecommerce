@@ -23,3 +23,7 @@
 "price":"2999"
 "image":"aaaa"
 "category":"nike"
+
+ "username":"jaseem",
+      "email":"jaseem@1",
+      "password":"123456789",

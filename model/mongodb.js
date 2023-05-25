@@ -13,10 +13,18 @@ const signupSchema= new mongoose.Schema({
         type:String,
         required:true
     },
-    
-    // isAdmin:{
-    //     type:Number,
-    //     require:false
-    // }
+    cart:
+    [
+
+        {
+            type:String,
+            required:false
+        }
+    ]
+     ,
+     wishList:[{
+        type:String
+     }]
+
 })
 module.exports= mongoose.model("ecollection",signupSchema)

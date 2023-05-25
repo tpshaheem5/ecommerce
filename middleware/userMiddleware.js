@@ -1,19 +1,21 @@
-// const checkUser = (req,res,next)=>{
-//     // get JWT token from 'jwt' cookie
-//     const token = req.cookies.jwt;
-//     if(token){
-//        // verify JWT token
-//       jwt.verify(jwt,'shaheem',(err,decoded)=>{
-//         if(err){
-//           return res.status(401).json({ message: 'Invalid or expired token' });
-//         }else{
-//           req.user = decoded;
-//           next();
-//         }
-//       })
-//     }else{
-//       return res.status(401).json({ message: 'No token provided' });
-//     }
-//   }
+const jwt = require('jsonwebtoken');
 
-//   module.exports = checkUser
+
+const verifyToken = (req, res, next) => {
+  const token = req.cookies.token
+  console.log(token);
+
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const verified=jwt.verify(token,"secret-key")
+    req.user=verified
+    next();
+  } catch (err) {
+    console.log(err);
+    return res.status(401).json({ error: 'Invalid token'});
+  }
+};
+module.exports=verifyToken
