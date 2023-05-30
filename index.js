@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 // const session = require("express-session")
 
   
-mongoose.connect("mongodb://127.0.0.1:27017/eCommerce")
+mongoose.connect("mongodb://127.0.0.1:27017/eCommerce") //x
   .then(() => {
     console.log("mongodb connected");
   })
@@ -20,8 +20,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/eCommerce")
 // const user = require("./contoller/userController");
 // const admin = require("./contoller/adminController");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); 
+// app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); //x
 
 // admin routes
 const adminRouter = require('./routes/adminRouter')

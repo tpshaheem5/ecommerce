@@ -4,25 +4,23 @@ const schema = require("../model/mongodb");
 const pSchema = require("../model/productDatabase");
 const mongoose = require("mongoose");
 
-
 const login = async (req, res) => {
   try {
-  const email = req.body.email;
-  const password = req.body.password;
+    const email = req.body.email;
+    const password = req.body.password;
 
-  // Check if email and password are valid
-  if (email !== "admin@example.com" || password !== "password"){
-    throw new Error('Invalid Email or Password')
-  } 
-    const token = jwt.sign({ email }, 'your-secret-key');
-    res.cookie('token',token)
-    res.setHeader("Authorization", token)
+    // Check if email and password are valid
+    if (email !== "admin@example.com" || password !== "password") {
+      throw new Error("Invalid Email or Password");
+    }
+    const token = jwt.sign({ email }, "your-secret-key");
+    res.cookie("token", token);
+    res.setHeader("Authorization", token);
     res.status(200).json({ message: "Admin registrade" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Server error" });
   }
- catch (error) {
-  console.log(error);
-  return res.status(500).json({ error: 'Server error' });
-}
 };
 
 const allUsers = async (req, res) => {
@@ -58,25 +56,6 @@ const createProducts = async (req, res) => {
   });
   res.json("product create succusss");
 };
-
-// const updateProduct = async (req, res) => {
-//   try {
-//   const productId = req.params.id;
-//   console.log(productId);
-//   const { title, description, price, image, category } = req.body;
-
-//     const result = await pSchema.findByIdAndUpdate({productId},{ title, description, price, image, category });
-//      console.log(result)
-//     if (!result) {
-//       return res.status(404).json({ message: "Product not found" });
-//     }
-//     res.json({ message: "Product updated",result });
-//   } catch (error) {
-
-//     console.error(error);
-//     res.status(500).json({ message: "Error updating product" });
-//   }
-// };
 
 // update product
 const updateProduct = async (req, res) => {

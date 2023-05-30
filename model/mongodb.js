@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+// const pSchema = require("../model/productDatabase")
 
 const signupSchema= new mongoose.Schema({
     username:{
@@ -24,7 +25,25 @@ const signupSchema= new mongoose.Schema({
      ,
      wishList:[{
         type:String
-     }]
+     }],
+     orders:[
+        {
+            product:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"pSchema"
+            },
+            orderId:{
+                type:String
+            },
+            payment:{
+                type:Number
+            },
+            orderData:{
+                type:Date,
+                default:Date.now
+            }
+        }
+     ]
 
 })
 module.exports= mongoose.model("ecollection",signupSchema)
